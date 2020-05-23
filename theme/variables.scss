@@ -1,0 +1,173 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+@import "ionic.globals";
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/theming/overriding-ionic-variables/
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$colors: (
+  primary: #488aff,
+  secondary: #32db64,
+  danger: #f53d3d,
+  warning: #f79834,
+  light: #f4f4f4,
+  dark-light: #a0a0a0,
+  dark: #222,
+  success: #3caf5e
+);
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+$text-input-ios-show-valid-highlight: false !default;
+$text-input-ios-show-invalid-highlight: false !default;
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+$text-input-md-show-valid-highlight: false !default;
+$text-input-md-show-invalid-highlight: false !default;
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+$text-input-wp-show-valid-highlight: false !default;
+$text-input-wp-show-invalid-highlight: false !default;
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+.main-title {
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  span {
+    position: relative;
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: bold;
+
+    &:after {
+      position: absolute;
+      top: 50%;
+      left: 110%;
+      width: 2000px;
+      height: 1px;
+      background: rgb(177, 177, 177);
+      content: '';
+    }
+  }
+}
+
+.table-header {
+  background-color: map_get($colors, light);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+ion-toast {
+  &.success {
+    .toast-wrapper {
+      background: map_get($colors, success);
+    }
+  }
+
+  &.error{
+    .toast-wrapper {
+      background: map_get($colors, danger);
+    }
+  }
+
+  &.warning{
+    .toast-wrapper{
+      background: map_get($colors, warning);
+    }
+  }
+
+  .toast-message {
+    white-space: pre;
+  }
+}
+
+.hidden-file-input{
+  opacity: 0;
+  visibility: hidden;
+}
+
+.counter{
+  text-align: center;
+  overflow: hidden;
+  & &__title, & &__sub-title{
+    font-size: 16px;
+    color: map_get($colors, dark-light);
+  }
+
+  & &__value{
+    font-size: 50px;
+    &--success{
+      color: map_get($colors, success);
+    };
+  }
+
+  & &__vdelimetr:after{
+    position: absolute;
+    top: 10%;
+    left: 100%;
+    width: 1px;
+    height: 80%;
+    background: map_get($colors, dark-light);
+    content: '';
+  }
+}
+
+.border{
+  padding: 5px;
+  border: 1px solid map_get($colors, dark-light);
+  margin-bottom: 10px;
+}
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/ionicons/
+
+@import "ionic.ionicons";
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";

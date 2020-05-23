@@ -1,0 +1,47 @@
+
+<ion-card class="patient-info">
+  <ion-card-content>
+    <ion-row>
+      <ion-col  col-12 col-sm-4>
+        <div class="patient-info__pic">
+          <user-pic [img]="model.profileImageUrl"></user-pic>
+        </div>
+        <p class="patient-info__name">
+          {{model.name}} {{model.surname}}
+        </p>
+        <p>
+          {{model.birthDay | date}}
+        </p>
+        <!--<p>-->
+          <!--NHS №: {{model.nhsNo}}-->
+        <!--</p>-->
+
+      </ion-col>
+      <ion-col col-12 col-sm-4>
+        <p>Hospital №: {{model.clinicHospitalNumber}}</p>
+        <p>GP/Practice: {{model.gP_Practitioner}}</p>
+        <p>Comments: {{model.comments}}</p>
+        <p>Status</p>
+        <p class="patient-info__status-value"
+           [ngClass]="{'patient-info__status-value--active': model.status == 1, 'patient-info__status-value--sos': model.status == 2, 'patient-info__status-value--discharged': model.status == 3 }">{{model.statusText}}</p>
+        <button *ngIf="isShowButtons && model.status != dischargedStatus" ion-button="" color="light" (click)="discharge()">Discharge Patient</button>
+
+      </ion-col>
+      <ion-col col-12 col-sm-4>
+        <p>Address: {{model.houseNumber}}, {{model.address}}
+          {{model.postCode}}</p>
+        <p>
+          Home Tel №:
+          <ng-container>{{model.phoneNumber?model.phoneNumber:'---'}}</ng-container>
+        </p>
+        <p>
+          Work Tel №:
+          <ng-container>{{model.workPhoneNumber?model.workPhoneNumber:'---'}}</ng-container>
+        </p>
+        <p>Mobile Tel №: {{model.mobilePhoneNumber}}</p>
+
+        <button ion-button="" *ngIf="isShowButtons" (click)="editPatient()" color="light">Edit</button>
+      </ion-col>
+    </ion-row>
+  </ion-card-content>
+</ion-card>

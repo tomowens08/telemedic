@@ -1,0 +1,20 @@
+<div class="head-part">
+    <close-modal></close-modal>
+
+    <div class="head-part__wrap">
+
+     <ion-row>
+         <ion-col col-12 col-sm-12 col-md-12 col-lg-12 margin-bottom *ngFor="let area of headArea.bodyParts">
+             <body-parts
+                [Areas]="area"
+                [mapName]="area.name"
+                [srcPath]="'../../assets/imgs/body/'+area.name+'.png'"
+                [part]="'head'"
+                [patientId]="patientId"
+                [bodyPartIdsWithFeedback]="bodyPartIdsWithFeedback"
+             ></body-parts>
+         </ion-col>
+     </ion-row>
+
+    </div>
+</div>

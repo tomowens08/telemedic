@@ -1,0 +1,19 @@
+<div>
+  <button full ion-button icon-only (click)="home()">
+    <ion-icon name="md-home"></ion-icon>
+  </button>
+</div>
+
+<div *ngIf="!isPatient">
+  <button full ion-button icon-only (click)="profile()">
+    <ion-icon name="person"></ion-icon>
+  </button>
+</div>
+
+<div>
+  <button full ion-button icon-only (click)="logout()">
+    <ion-icon name="md-log-out"></ion-icon>
+  </button>
+</div>
+
+

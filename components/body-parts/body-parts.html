@@ -1,0 +1,36 @@
+<div class="body-parts">
+  <map name="{{mapName}}" class="map-{{mapName}}">
+
+    <ng-container *ngIf="part != 'head'">
+      <area
+              *ngFor="let area of Areas; let i=index"
+              shape="poly"
+              [id]="area.id"
+              [class]="area.id"
+              [coords]="area.areas[0].coords"
+              [attr.data-key]="area.id"
+              href="#"
+              [attr.data-name]="area.name"
+              [attr.data-bodyId]="area.id"
+              (click)="onAreaClick($event)"
+      >
+    </ng-container>
+    <ng-container *ngIf="part == 'head'">
+      <area
+              *ngFor="let area of Areas.areas; let i=index"
+              shape="poly"
+              [id]="Areas.id"
+              [class]="Areas.id"
+              [coords]="area.coords"
+              [attr.data-key]="Areas.id"
+              [attr.data-name]="Areas.name"
+              href="#"
+              [attr.data-bodyId]="Areas.id"
+              (click)="onAreaClick($event)"
+      >
+    </ng-container>
+
+  </map>
+  <img src="{{srcPath}}" [attr.usemap]="'#' + mapName" id="{{mapName}}" data-name="{{mapName}}"  alt="">
+
+</div>

@@ -1,0 +1,24 @@
+<div class="feedback-area">
+  <close-modal></close-modal>
+
+  <div class="feedback-area__wrap">
+
+    <h4>Feedback Area: {{bodyPartName}}</h4>
+
+    <ion-row>
+      <ion-col col-12 col-sm-12 col-md-12 col-lg-12 margin-bottom>
+
+        <canvas height="300" baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColors"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
+
+      </ion-col>
+    </ion-row>
+
+  </div>
+</div>
+

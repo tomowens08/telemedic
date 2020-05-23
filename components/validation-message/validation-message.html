@@ -1,0 +1,3 @@
+<div class="error-message" *ngIf="control && control.errors && (control.dirty || control.touched)">
+  <small *ngFor="let m of messages" [hidden]="!control.errors[m.validatorName]">{{m.message}}</small>
+</div>

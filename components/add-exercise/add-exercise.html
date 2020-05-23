@@ -1,0 +1,51 @@
+<div class="add-exercise">
+
+  <close-modal></close-modal>
+
+  <form #exerciseForm="ngForm" class="add-exercise__wrap">
+    <ion-item>
+      <ion-label>Left</ion-label>
+      <ion-toggle [(ngModel)]="exercise.isLeft" name="isLeft"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Right</ion-label>
+      <ion-toggle [(ngModel)]="exercise.isRight" name="isRight"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Suitable for repetition</ion-label>
+      <ion-toggle [(ngModel)]="exercise.isSuitableForRepetition" (ngModelChange)="suitableForRepetitionChanged()" name="isSuitableForRepetition"></ion-toggle>
+    </ion-item>
+    <ion-item *ngIf="exercise.isSuitableForRepetition">
+      <ion-label floating>Repetition</ion-label>
+      <ion-input disableEmodji type="number" [(ngModel)]="exercise.repetition" name="repetition" required [min]="0"></ion-input>
+    </ion-item>
+    <val-message *ngIf="exercise.isSuitableForRepetition" [control]="exerciseForm.form.controls.repetition" [messages]="validationMessages.repetition"></val-message>
+    <ion-item>
+      <ion-label>Suitable for time based routine</ion-label>
+      <ion-toggle [(ngModel)]="exercise.isSuitableForTimeBasedRoutine" (ngModelChange)="suitableForTimeBasedRoutineChanged()" name="isSuitableForTimeBasedRoutine"></ion-toggle>
+    </ion-item>
+    <ion-row *ngIf="exercise.isSuitableForTimeBasedRoutine" align-items-end>
+      <ion-col col-9 col-sm-9 col-lg-9>
+        <ion-item>
+          <ion-label floating>Time based routine</ion-label>
+          <ion-input disableEmodji type="number" [(ngModel)]="exercise.quantityOfMinutes" name="quantityOfMinutes" required [min]="0"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-3 col-sm-3 col-lg-3 text-end="">
+        minutes
+      </ion-col>
+    </ion-row>
+    <val-message *ngIf="exercise.isSuitableForTimeBasedRoutine" [control]="exerciseForm.form.controls.quantityOfMinutes" [messages]="validationMessages.quantityOfMinutes"></val-message>
+    <ion-item>
+      <ion-label floating="">Warm up</ion-label>
+      <ion-select name="warmUp" [(ngModel)]="exercise.warmUpIds" multiple="true">
+        <ion-option *ngFor="let w of warmUps" [value]="w.id">{{w.title}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-row align-items-end>
+      <ion-col text-right>
+        <button type="button" ion-button (click)="saveExercise(exerciseForm)">Save</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</div>

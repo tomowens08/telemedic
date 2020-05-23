@@ -1,0 +1,25 @@
+page-view-regimes {
+
+  .view-regimes-count {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 10px 0 0;
+  }
+  .view-regimes-list {
+    margin: 50px 0;
+
+    .button {
+      max-width: 180px;
+      margin: 0 0 10px;
+    }
+
+  }
+  ion-label {
+    white-space: normal;
+  }
+  .add-exercise__wrap {
+    padding: 20px 0;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,150 @@
+<ion-header>
+  <header [title]="'Edit My Details'"></header>
+</ion-header>
+
+<ion-content padding>
+  <div class="main-title">
+    <span>General information</span>
+  </div>
+
+  <ion-list class="general-info">
+    <ion-card class="edit-info">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12 col-sm-3 col-lg-3>
+              <div class="edit-info__pic">
+                <user-pic [img]="generalInfo.profileImageUrl"></user-pic>
+                <div *ngIf="generalInfo.profileImageUrl">
+                  <button type="button" small color="light" ion-button (click)="deleteProfilePhoto()">
+                    <ion-icon name="trash"></ion-icon>
+                    &nbsp;Delete
+                  </button>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col col-12 col-sm-7 col-lg-7 offset-lg-2 offset-sm-2>
+              <ion-list>
+                <ion-row wrap-reverse>
+                  <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                    <div class="general-info__label">
+                      Fist name
+                    </div>
+                    <div class="general-info__value">
+                      {{generalInfo.name}}
+                    </div>
+                  </ion-col>
+                  <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                    <div class="general-info__label">
+                      Last name
+                    </div>
+                    <div class="general-info__value">
+                      {{generalInfo.surname}}
+                    </div>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-12 col-sm-12 col-md-12 col-lg-6>
+                    <ion-list>
+                      <div class="general-info__label">
+                        Birthday
+                      </div>
+                      <div class="general-info__value">
+                        <ng-container>{{generalInfo.birthDay?(generalInfo.birthDay | date):'---'}}</ng-container>
+                      </div>
+                    </ion-list>
+                  </ion-col>
+                  <ion-col col-12 col-sm-12 col-md-12 col-lg-6>
+                    <button type="button" ion-button (click)="file.click()">
+                      <ion-icon name="camera"></ion-icon>
+                      &nbsp;Take profile photo
+                    </button>
+                    <input type="file" #file  name="logo" class="hidden-file-input" accept="image/jpeg,image/png"
+                           (change)="photoSelected($event)">
+                  </ion-col>
+                </ion-row>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <div class="main-title" margin-top="">
+    <span>Contact Details</span>
+  </div>
+
+  <form #profileForm="ngForm">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">House №</ion-label>
+          <ion-input disableEmodji type="text" name="house" [(ngModel)]="model.houseNumber" required=""></ion-input>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.house" [messages]="validationMessages.house"></val-message>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Street</ion-label>
+          <ion-input disableEmodji type="text" name="address" [(ngModel)]="model.address" required=""></ion-input>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.address" [messages]="validationMessages.address"></val-message>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">County</ion-label>
+          <ion-select name="county" [(ngModel)]="model.countyId" required="">
+            <ion-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.county" [messages]="validationMessages.county"></val-message>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Postcode</ion-label>
+          <ion-input disableEmodji type="text" name="postcode" [(ngModel)]="model.postCode" required=""></ion-input>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.postcode"
+                     [messages]="validationMessages.postcode"></val-message>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Home Tel. №</ion-label>
+          <ion-input disableEmodji digitAllow type="tel" name="homeTel" [(ngModel)]="model.phoneNumber"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Work Tel. №</ion-label>
+          <ion-input disableEmodji digitAllow type="tel" name="workTel" [(ngModel)]="model.workPhoneNumber"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Mobile Tel. №</ion-label>
+          <ion-input disableEmodji digitAllow type="tel" name="mobileTel" [(ngModel)]="model.mobilePhoneNumber" required=""></ion-input>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.mobileTel"
+                     [messages]="validationMessages.mobilePhoneNumber"></val-message>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label floating="">Email</ion-label>
+          <ion-input disableEmodji type="text" name="email" [(ngModel)]="model.emailAddress" required="" email=""></ion-input>
+        </ion-item>
+        <val-message [control]="profileForm.form.controls.email"
+                     [messages]="validationMessages.emailAddress"></val-message>
+      </ion-col>
+    </ion-row>
+    <div text-center="" margin-top="">
+      <button ion-button="" [disabled]="!canSubmit" (click)="save(profileForm)">Save</button>
+    </div>
+  </form>
+</ion-content>

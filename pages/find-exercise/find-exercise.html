@@ -1,0 +1,80 @@
+<ion-header>
+  <header [title]="'Find Exercise'"></header>
+</ion-header>
+
+<ion-content padding>
+  <div class="main-title">
+    <span>Search</span>
+  </div>
+
+  <div padding-top>
+    Search by:
+    <ion-segment [(ngModel)]="searchType">
+      <ion-segment-button value="name" acti>Name</ion-segment-button>
+      <ion-segment-button value="anatomic-area">Anatomical area</ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div [ngSwitch]="searchType">
+    <ion-row *ngSwitchCase="'name'">
+      <ion-col col-sm-12 col-md-4>
+        <ion-item>
+          <ion-label floating>Exercise Name</ion-label>
+          <ion-input disableEmodji type="text" [(ngModel)]="filter.name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngSwitchCase="'anatomic-area'">
+      <ion-col col-sm-12 col-md-4>
+        <ion-item>
+          <ion-label floating>Select body part</ion-label>
+          <ion-select [(ngModel)]="filter.bodyPartId">
+            <ion-option *ngFor="let bodyPart of bodyParts" [value]="bodyPart.id">{{bodyPart.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="find-exercise__btns">
+      <ion-col text-center>
+        <button ion-button (click)="search()">Search</button>
+        <button ion-button color="light" (click)="clearFilter()">Clear</button>
+        <!--<button ion-button color="light">Show all</button>-->
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="search-results">
+    <div class="main-title">
+      <span>Search results</span>
+    </div>
+
+    <!--<ion-row>
+      <ion-col text-right>
+        <button ion-button>Add Exercises</button>
+      </ion-col>
+    </ion-row>-->
+
+    <ion-list>
+      <ion-item *ngFor="let exercise of exercises" (click)="openModal(exercise)">
+        <ion-thumbnail item-start>
+          <ng-container>
+            <img [src]="exercise.exerciseImageBlobUrl?exercise.exerciseImageBlobUrl:'../../assets/imgs/not-found-image.png'">
+          </ng-container>
+        </ion-thumbnail>
+        <h2>{{exercise.name}}</h2>
+        <p>
+          <ng-container>{{exercise.equipmentRequired?exercise.equipmentRequired:'Nothing required.'}}</ng-container>
+        </p>
+        <p>
+          <ng-container>{{exercise.warnings?exercise.warnings:'No warnings.'}}</ng-container>
+        </p>
+        <button ion-button color="light"  item-end>Select</button>
+      </ion-item>
+      <ion-item *ngIf="!exercises.length">
+        No results.
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,90 @@
+page-edit-patient {
+  ion-item-group .item-ios:last-child .item-inner {
+    border-bottom: 0.55px solid #c8c7cc;
+  }
+
+  ion-card img{
+    display: inline-block;
+  }
+  .edit-info {
+    .button {
+      width: 100%;
+    }
+    &__pic {
+      max-width: 300px;
+      margin: 0 auto 30px;
+      text-align: center;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+      .button {
+        width: auto;
+      }
+
+    }
+    &.card {
+      box-shadow: none;
+    }
+
+    .card-content {
+      padding: 0 0 20px;
+      //border-bottom: 1px solid #ccc
+    }
+    .card-title {
+      //padding-left: 5px;
+    }
+    .item {
+      //padding-left: 0;
+
+      ion-label {
+        white-space: normal;
+      }
+
+    }
+
+
+  }
+  .list-md .item-select:last-child,
+  .list-md .item-datetime:last-child {
+    border-bottom: 1px solid #dedede;
+  }
+
+  div.fileinputs {
+    position: relative;
+  }
+
+  div.fakefile {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+  }
+
+  input.file {
+    position: relative;
+    text-align: right;
+
+
+    opacity: 0;
+    z-index: 2;
+  }
+
+
+}
+@media (min-width: 576px) {
+
+  page-edit-patient {
+
+    .edit-info {
+
+      .button {
+        max-width: 250px;
+      }
+
+    }
+
+  }
+
+}

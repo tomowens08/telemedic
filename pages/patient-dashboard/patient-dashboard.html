@@ -1,0 +1,92 @@
+<ion-header>
+  <header [title]="'Dashboard'"></header>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card class="patient-info">
+    <ion-card-content>
+      <ion-row>
+        <ion-col  col-12 col-sm-4>
+          <div class="patient-info__pic">
+            <user-pic [img]="model.patientDetails.profileImageUrl"></user-pic>
+          </div>
+          <p class="patient-info__name">
+            {{model.patientDetails.name}} {{model.patientDetails.surname}}
+          </p>
+          <p>
+            {{model.patientDetails.birthDay | date}}
+          </p>
+          <!--<p>-->
+          <!--NHS №: {{model.nhsNo}}-->
+          <!--</p>-->
+
+        </ion-col>
+        <ion-col col-12 col-sm-4>
+          <p>Address: {{model.patientDetails.houseNumber}}, {{model.patientDetails.address}}
+            {{model.patientDetails.postCode}}</p>
+          <p>
+            Home Tel №:
+            {{model.patientDetails.phoneNumber? model.patientDetails.phoneNumber : '---'}}
+          </p>
+          <p>
+            Work Tel №:
+            {{model.patientDetails.workPhoneNumber? model.patientDetails.workPhoneNumber : '---' }}
+          </p>
+          <p>Mobile Tel №: {{model.patientDetails.mobilePhoneNumber}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-row>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Overall progress</span>
+          <ion-row>
+            <ion-col>
+              <p class="counter__value">{{model.overallProgress}}%</p>
+              <p class="counter__sub-title">Completed</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewProgressNav()">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Latest Feedback</span>
+          <ion-row>
+            <ion-col class="counter__vdelimetr">
+              <p class="counter__value"> {{model.latestFeedbackAgg? model.latestFeedbackAgg: '-'}}</p>
+              <p class="counter__sub-title">Agg</p>
+            </ion-col>
+            <ion-col>
+              <p class="counter__value">{{model.latestFeedbackEase? model.latestFeedbackEase: '-'}}</p>
+              <p class="counter__sub-title">Ease</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewFeedbackNav()" >View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Regimes</span>
+          <ion-row>
+            <ion-col>
+              <p class="counter__value">{{model.regimesCount}}</p>
+              <p class="counter__sub-title">Total</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewRegimesNav()">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

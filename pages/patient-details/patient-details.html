@@ -1,0 +1,72 @@
+<ion-header>
+  <header [title]="'Patient Details'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <patient-info [model]="model.patientDetails" [isShowButtons]="true"></patient-info>
+  <ion-row>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+        <span class="counter__title">Overall progress</span>
+          <ion-row>
+            <ion-col>
+              <p class="counter__value">{{model.overallProgress}}%</p>
+              <p class="counter__sub-title">Completed</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewProgress()">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Latest Feedback</span>
+          <ion-row>
+            <ion-col class="counter__vdelimetr">
+              <p class="counter__value"> {{model.latestFeedbackAgg? model.latestFeedbackAgg: '-'}}</p>
+              <p class="counter__sub-title">Agg</p>
+            </ion-col>
+            <ion-col>
+              <p class="counter__value">{{model.latestFeedbackEase? model.latestFeedbackEase: '-'}}</p>
+              <p class="counter__sub-title">Ease</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewFeedback()">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Regimes</span>
+          <ion-row>
+            <ion-col>
+              <p class="counter__value">{{model.regimesCount}}</p>
+              <p class="counter__sub-title">Total</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="" (click)="viewRegimes()">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-12 col-sm-6 col-md-4 col-xl-3>
+      <ion-card class="counter">
+        <ion-card-content>
+          <span class="counter__title">Video Call</span>
+          <ion-row>
+            <ion-col>
+              <p class="counter__value counter__value--success">{{model.activityStatusText}}</p>
+              <p class="counter__sub-title">&nbsp;</p>
+            </ion-col>
+          </ion-row>
+          <button ion-button="" block="">View</button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+
+</ion-content>

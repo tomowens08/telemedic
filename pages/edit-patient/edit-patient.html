@@ -1,0 +1,187 @@
+<ion-header>
+  <header [title]="'Edit Patient Details'"></header>
+</ion-header>
+<ion-content #mycontent padding>
+  <form #detailsForm="ngForm">
+    <ion-list>
+      <div class="main-title">
+        <span>General Information</span>
+      </div>
+      <ion-card class="edit-info">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12 col-sm-3 col-lg-3>
+                <div class="edit-info__pic">
+                  <user-pic [img]="getPatientModel.patientDetails?.profileImageUrl"></user-pic>
+                  <div *ngIf="getPatientModel.patientDetails?.profileImageUrl">
+                    <button type="button" small color="light" ion-button (click)="deleteProfilePhoto()">
+                      <ion-icon name="trash"></ion-icon>
+                      &nbsp;Delete
+                    </button>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col col-12 col-sm-7 col-lg-7 offset-lg-2 offset-sm-2>
+                <ion-list>
+                  <ion-row wrap-reverse>
+                    <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                      <ion-item>
+                        <ion-label floating>First Name</ion-label>
+                        <ion-input disableEmodji type="text" #firstName="ngModel" [(ngModel)]="editPatientModel.name" name="firstName" required></ion-input>
+                      </ion-item>
+                      <val-message [control]="detailsForm.form.controls.firstName" [messages]="validationMessages.firstName"></val-message>
+                    </ion-col>
+                    <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                      <ion-item>
+                        <ion-label floating>Last Name</ion-label>
+                        <ion-input disableEmodji type="text" #lastName="ngModel" [(ngModel)]="editPatientModel.surname" name="lastName" required></ion-input>
+                      </ion-item>
+                      <val-message [control]="detailsForm.form.controls.lastName" [messages]="validationMessages.lastName"></val-message>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6>
+                      <ion-list>
+                        <ion-item>
+                          <ion-label floating>Birthday</ion-label>
+                          <ion-datetime displayFormat="{{displayDateFormat}}" #birthDay (ionChange)="handleChangeDate($event)"
+                                        [(ngModel)]="birthday" name="birthDay" required></ion-datetime>
+                        </ion-item>
+                        <val-message [control]="detailsForm.form.controls.birthday" [messages]="validationMessages.birthday"></val-message>
+                      </ion-list>
+                    </ion-col>
+                    <ion-col col-12 col-sm-12 col-md-12 col-lg-6>
+                      <button type="button" ion-button (click)="file.click()">
+                        <ion-icon name="camera"></ion-icon>
+                        &nbsp;Take profile photo
+                      </button>
+                      <input type="file" #file  name="logo" class="hidden-file-input" accept="image/jpeg,image/png"
+                             (change)="photoSelected($event)">
+                    </ion-col>
+                  </ion-row>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ion-list>
+    <ion-list>
+      <div class="main-title">
+        <span> Contact Details</span>
+      </div>
+
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-3 col-md-2>
+            <ion-item>
+              <ion-label floating>House Number</ion-label>
+              <ion-input disableEmodji type="text" #houseNumber="ngModel" [(ngModel)]="editPatientModel.houseNumber" name="houseNumber" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.address" [messages]="validationMessages.houseNumber"></val-message>
+          </ion-col>
+          <ion-col col-12 col-sm-9 col-md-4>
+            <ion-item>
+              <ion-label floating>Address</ion-label>
+              <ion-input disableEmodji type="text" #address="ngModel" [(ngModel)]="editPatientModel.address" name="address" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.address" [messages]="validationMessages.address"></val-message>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>County</ion-label>
+              <ion-select #county="ngModel" [(ngModel)]="editPatientModel.countyId" name="county" required>
+                <ion-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.county" [messages]="validationMessages.county"></val-message>
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>Postcode</ion-label>
+              <ion-input disableEmodji #postcode="ngModel" type="text" [(ngModel)]="editPatientModel.postCode" name="postcode" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.postcode" [messages]="validationMessages.postcode"></val-message>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>Home Tel. No.</ion-label>
+              <ion-input disableEmodji digitAllow #homeTel="ngModel" type="tel" [(ngModel)]="editPatientModel.phoneNumber" name="homeTel"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>Work Tel. No.</ion-label>
+              <ion-input disableEmodji digitAllow #workTel="ngModel" type="tel" [(ngModel)]="editPatientModel.workPhoneNumber" name="workTel"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>Mobile Tel. No.</ion-label>
+              <ion-input disableEmodji digitAllow #mobileTel="ngModel" type="tel" [(ngModel)]="editPatientModel.mobilePhoneNumber" name="mobileTel" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.mobileTel" [messages]="validationMessages.mobileTel"></val-message>
+          </ion-col>
+          <ion-col col-12 col-sm-6 col-md-3>
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input disableEmodji type="email" #email="ngModel" [(ngModel)]="editPatientModel.emailAddress" name="email" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.email" [messages]="validationMessages.email"></val-message>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+    </ion-list>
+    <ion-list>
+      <div class="main-title">
+        <span> Medical Details</span>
+      </div>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-12 col-md-6>
+            <ion-item>
+              <ion-label floating>Clinic/Hospital No.</ion-label>
+              <ion-input disableEmodji #hospitalNum="ngModel" type="text" [(ngModel)]="editPatientModel.clinicHospitalNumber" name="hospitalNum" required></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.hospitalNum" [messages]="validationMessages.hospitalNum"></val-message>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-12 col-md-6>
+            <ion-item>
+              <ion-label floating>GP/Practitioner</ion-label>
+              <ion-input disableEmodji #practice="ngModel" type="text" required [(ngModel)]="editPatientModel.gP_Practitioner" name="practice"></ion-input>
+            </ion-item>
+            <val-message [control]="detailsForm.form.controls.practice" [messages]="validationMessages.practice"></val-message>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+      <ion-item-group>
+        <ion-row>
+          <ion-col col-12 col-sm-12 col-md-6>
+            <ion-item>
+              <ion-label floating>Comments</ion-label>
+              <ion-textarea #consultant="ngModel" [(ngModel)]="editPatientModel.comments" name="comments"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-item-group>
+    </ion-list>
+    <button  ion-button (click)="saveEditPatient(detailsForm)" [disabled]="!canSubmit">Save</button>
+  </form>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <header [title]="'View Feedback'"></header>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="main-title">
+    <span>Feedbacks</span>
+  </div>
+
+  <ion-card>
+
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+          <body-parts
+                  [Areas]="imageFrontAreas"
+                  [mapName]="'front'"
+                  [srcPath]="'../../assets/imgs/body/Front.png'"
+                  [part]="'front'"
+                  [patientId]="patientId"
+                  [bodyPartIdsWithFeedback]="bodyPartIdsWithFeedback.bodyPartIds"
+          ></body-parts>
+        </ion-col>
+        <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+          <body-parts
+                  [Areas]="imageBackAreas"
+                  [mapName]="'back'"
+                  [srcPath]="'../../assets/imgs/body/Back.png'"
+                  [part]="'back'"
+                  [patientId]="patientId"
+                  [bodyPartIdsWithFeedback]="bodyPartIdsWithFeedback.bodyPartIds"
+          ></body-parts>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header>
+  <header [title]="'View Regime'"></header>
+</ion-header>
+<ion-content #mycontent padding>
+  <div class="main-title">
+    <span>Existing Regimes</span>
+  </div>
+  <ion-row>
+    <ion-col text-right *ngIf="!isPatientDischarged">
+      <button ion-button (click)="createRegime()">Create New Regime</button>
+    </ion-col>
+  </ion-row>
+
+  <hr>
+  <div class="view-regimes-list" *ngFor="let regime of regimesList; let i=index">
+    <ion-row justify-content-between>
+      <ion-col col-12 col-sm-3 col-md-3 col-lg-3>
+        <h4><span class="view-regimes-count">{{i+1+'. '}} </span>{{regime.title}}</h4>
+      </ion-col>
+      <ion-col col-12 col-sm-5 col-md-5 col-lg-5>
+        <div>{{regime.startDate | formatDate }} - {{regime.endDate | formatDate}}</div>
+        <p>{{regime.frequency}}
+          <ng-container>{{regime.frequency <= 1?'time':'times'}}</ng-container>
+          a {{regime.frequencyIntervalText}}.
+        </p>
+      </ion-col>
+      <ion-col col-12 col-sm-4 col-md-3 col-lg-2>
+        <div *ngIf="!isPatientDischarged">
+          <button ion-button block small color="light" (click)="modifyRegime(regime.id)">Modify Regime</button>
+          <button ion-button block small color="light" (click)="deleteRegime(regime.id)">Delete Regime</button>
+          <button ion-button block small color="light" (click)="addExercise(regime.id)">Add Exercise</button>
+        </div>
+        <button *ngIf="regime.regimeExercises.length" ion-button block small color="light" (click)="toggleExercises(regime.id)">
+          View Exercises
+        </button>
+      </ion-col>
+    </ion-row>
+    <div *ngIf="regime.regimeExercises.length && isShowExerciseList(regime.id)">
+      <hr>
+      <ion-row align-items-center="">
+        <ion-col col-9>
+          <h6>Exercise List:</h6>
+        </ion-col>
+      </ion-row>
+
+      <ng-container>
+        <hr>
+        <div *ngFor="let regimeExercise of regime.regimeExercises; let j=index;">
+          <ion-row align-items-center>
+            <ion-col col-12 col-sm-3>
+              <span>{{regimeExercise.exercise.name}}</span>
+            </ion-col>
+            <ion-col col-12 col-sm-3>
+              <p *ngIf="regimeExercise.isSuitableForRepetition">
+                {{regimeExercise.repetition}}
+                <span>{{regimeExercise.repetition > 1?'repetitions':'repetition'}}</span>
+              </p>
+              <p *ngIf="regimeExercise.isSuitableForTimeBasedRoutine">
+                {{regimeExercise.quantityOfMinutes}}
+                min
+              </p>
+            </ion-col>
+            <ion-col col-12 col-sm-2>
+              <ion-badge *ngFor="let exWarmUp of regimeExercise.exerciseWarmUps" margin-right="">{{exWarmUp.warmUp.title}}</ion-badge>
+            </ion-col>
+            <ion-col col-12 col-sm-3 *ngIf="!isPatientDischarged">
+              <ion-buttons end>
+                <button (click)="editExercise(regime.id, regimeExercise)" ion-button clear icon-only item-end="">
+                  <ion-icon name="create"></ion-icon>
+                </button>
+                <button (click)="deleteExerciseFromRegime(regimeExercise.id)" ion-button clear icon-only item-end="">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ng-container>
+
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="!regimesList.length">
+    <p>No any regimes.</p>
+  </div>
+
+</ion-content>

@@ -1,0 +1,37 @@
+page-find-patient {
+  .search-results{
+    margin-top: 40px;
+
+    &__status--active{
+      color: map_get($colors, success);
+    }
+
+    &__status--sos{
+      color: map_get($colors, primary);
+    }
+
+    &__status--discharged{
+      color: map_get($colors, dark-light);
+    }
+  }
+  .mob-view {
+    color: #000;
+  }
+  .desktop-view {
+    display: none;
+  }
+}
+
+
+@media (min-width: 768px) {
+
+  page-find-patient {
+    .mob-view {
+      display: none;
+    }
+    .desktop-view {
+      display: flex;
+    }
+  }
+
+}

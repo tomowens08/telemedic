@@ -1,0 +1,39 @@
+page-review-exercise {
+  .user-exercise-info {
+    &__name{
+      font-weight: bold;
+      font-size: 1.8em;
+      margin-bottom: .5em;
+    }
+
+    &__repetitions{
+      font-size: 1.6em;
+    }
+
+    &__user-pic{
+      img{
+        max-width: 150px;
+        margin: 0 auto;
+      }
+    }
+
+    &__user-name{
+      font-size: 1.2em;
+    }
+  }
+
+  .overall-progress, .overall-performance{
+    margin-top: 3em;
+    canvas{
+      max-height: 300px;
+    }
+  }
+
+  .exercise-review-nav{
+    margin-top: 1em;
+    text-align: center;
+    &__page{
+      font-size: 1.8em;
+    }
+  }
+}

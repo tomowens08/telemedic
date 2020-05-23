@@ -1,0 +1,37 @@
+<ion-header>
+  <header [title]="'View My Exercise'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="main-title">
+    <span>Current Exercise</span>
+  </div>
+<ion-row>
+  <ion-col>
+    <div>
+      <img [src]="model.exerciseImageBlobUrl">
+    </div>
+  </ion-col>
+  <ion-col>
+    <h3>{{model.name}}</h3>
+
+    <p>Equipment required</p>
+    <p>{{model.equipmentRequired}}</p>
+    <br>
+
+    <p>Other Instructions</p>
+    <p>{{model.otherInstructions}}</p>
+    <br>
+
+    <p>Warning</p>
+    <p>{{model.warnings}}1</p>
+    <br>
+
+    <p>Repetition</p>
+    <p>{{model.repetition}}</p>
+
+
+  </ion-col>
+</ion-row>
+</ion-content>

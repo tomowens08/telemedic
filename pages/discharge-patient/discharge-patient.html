@@ -1,0 +1,25 @@
+<ion-header>
+  <header [title]="'Discharge Patient'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <patient-info [model]="patient.patientDetails"></patient-info>
+  <form #discharegeForm="ngForm">
+    <ion-item>
+      <ion-label floating="">Discharge summary</ion-label>
+      <ion-textarea rows="5" name="dischargeSummary" [(ngModel)]="model.dischargeSummary" required=""></ion-textarea>
+    </ion-item>
+    <val-message [control]="discharegeForm.form.controls.dischargeSummary" [messages]="validationMessages.dischargeSummary"></val-message>
+    <div class="main-title" margin-top="" margin-bottom="">
+      <span>Confirmation</span>
+    </div>
+
+    Are you happy to discharge {{patient.patientDetails.name}} {{patient.patientDetails.surname}} from this pathway?
+
+    <div text-center="">
+      <button ion-button="" (click)="discharge(discharegeForm)">Discharge</button>
+    </div>
+
+  </form>
+</ion-content>

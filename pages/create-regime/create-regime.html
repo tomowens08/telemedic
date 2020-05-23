@@ -1,0 +1,71 @@
+<ion-header>
+  <header [title]="modify? 'Modify Regime': 'Create New Regime'"></header>
+</ion-header>
+
+<ion-content padding>
+  <div class="main-title">
+    <span>
+      <ng-container>{{modify?'Current Regime':'New Regime'}}</ng-container>
+    </span>
+  </div>
+<form #regimeForm="ngForm">
+  <ion-row>
+    <ion-col col-md-9>
+      <ion-item>
+        <ion-label floating>Regime Title</ion-label>
+        <ion-input disableEmodji type="text" [(ngModel)]="model.title" name="title" required=""></ion-input>
+
+      </ion-item>
+      <val-message [control]="regimeForm.form.controls.title" [messages]="validationMessages.title"></val-message>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-md-3>
+      <ion-item>
+        <ion-label floating>Start Date</ion-label>
+        <ion-datetime displayFormat="{{datepickerDisplayFormat}}" name="startDate" [(ngModel)]="startDate"
+                      (ngModelChange)="startDateSelected()" max="{{dateTimePickerMaxYear}}" required=""></ion-datetime>
+      </ion-item>
+      <val-message [control]="regimeForm.form.controls.startDate" [messages]="validationMessages.startDate"></val-message>
+    </ion-col>
+    <ion-col col-md-3>
+      <ion-item>
+        <ion-label floating>End Date</ion-label>
+        <ion-datetime [min]="minEndDate" displayFormat="{{datepickerDisplayFormat}}" name="endDate" [(ngModel)]="endDate"
+                      (ngModelChange)="endDateSelected()" max="{{dateTimePickerMaxYear}}" required=""></ion-datetime>
+      </ion-item>
+      <val-message [control]="regimeForm.form.controls.endDate" [messages]="validationMessages.endDate"></val-message>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-md-3>
+      <ion-item>
+        <ion-label floating="">Regime Frequency</ion-label>
+        <ion-input disableEmodji type="number" name="frequency" [(ngModel)]="model.frequency" [min]="0" required="" #field="ngModel"></ion-input>
+      </ion-item>
+      <val-message [control]="regimeForm.form.controls.frequency" [messages]="validationMessages.frequency"></val-message>
+    </ion-col>
+    <ion-col col-md-3>
+      <ion-item>
+        <ion-label floating="">Times per</ion-label>
+        <ion-select [(ngModel)]="model.frequencyInterval" name="frequencyInterval" required="" interface="popover">
+          <ion-option [value]="1">Day</ion-option>
+          <ion-option [value]="2">Week</ion-option>
+          <ion-option [value]="3">Month</ion-option>
+        </ion-select>
+      </ion-item>
+      <val-message [control]="regimeForm.form.controls.frequencyInterval" [messages]="validationMessages.frequencyInterval"></val-message>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+
+    <!--<div class="main-title">-->
+      <!--<span>Suggested Warm Ups</span>-->
+    <!--</div>-->
+
+  </ion-row>
+  <div text-center="" margin-top="">
+    <button ion-button="" (click)="save(regimeForm)" >Save</button>
+  </div>
+</form>
+</ion-content>

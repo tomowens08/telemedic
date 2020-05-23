@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <form>
+    <ion-list>
+
+      <ion-item>
+        <ion-label fixed>Email:</ion-label>
+        <ion-input disableEmodji type="email" [(ngModel)]="model.userNameOrEmailAddress" name="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Password: </ion-label>
+        <ion-input disableEmodji type="password" [(ngModel)]="model.password" name="password"></ion-input>
+      </ion-item>
+
+      <div margin-top="">
+        <button ion-button color="primary" block (click)="login()">Sign In</button>
+      </div>
+
+      <ion-row>
+        <ion-col text-right="">
+          <button ion-button="" clear="" (click)="forgotPassword()">Forgot password?</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-list>
+
+
+  </form>
+</ion-content>

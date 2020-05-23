@@ -1,0 +1,89 @@
+<ion-header>
+  <header [title]="'View Progress'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card class="user-progress">
+    <ion-card-content>
+      <ion-row text-center="" align-items-center="">
+        <ion-col class="user-progress-col">
+
+            <user-pic [img]="commonProgress?.patient?.profileImageUrl"></user-pic>
+
+          <div class="user-progress-col__name">
+            {{commonProgress?.patient?.name}} {{commonProgress?.patient?.surname}}
+          </div>
+        </ion-col>
+        <ion-col class="user-progress-col">
+          <div class="user-progress-col__header">Overall Progress</div>
+          <div class="user-progress-col__value"> {{commonProgress?.progress}}%</div>
+          <div class="user-progress-col__footer">Average from all regimes</div>
+        </ion-col>
+        <ion-col class="user-progress-col">
+          <div class="user-progress-col__header">
+            Overall Repetition <br/>
+            Completion
+          </div>
+          <div class="user-progress-col__value">{{commonProgress?.repetitionRate}}%</div>
+          <div class="user-progress-col__footer">Average from all regimes</div>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="main-title" margin-top="">
+    <span>Session progress</span>
+  </div>
+
+  <ion-row>
+    <ion-col col-12 col-sm-6>
+      <ion-item>
+        <ion-label floating="">Regime</ion-label>
+        <ion-select [(ngModel)]="activeRegimeId" (ngModelChange)="regimeChanged()">
+          <ion-option *ngFor="let regime of regimes" [value]="regime.id">{{regime.title}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col col-12 col-sm-6 offset-sm-6>
+      <ion-segment [(ngModel)]="exerciseOrder" (ngModelChange)="changedOrder()">
+        <ion-segment-button value="desc">High performance</ion-segment-button>
+        <ion-segment-button value="asc">Low performance</ion-segment-button>
+      </ion-segment>
+    </ion-col>
+  </ion-row>
+
+  <div class="exercise-list">
+    <ion-row align-items-center="" class="exercise-list-item" *ngFor="let ex of exercisesPerformance" (click)="reviewExerciseNav(ex.id)">
+      <ion-col>
+        <div class="exercise-list-item__name">{{ex.name}}</div></ion-col>
+      <ion-col>
+        <div class="exercise-list-item__value">{{ex.number}}</div>
+        <div *ngIf="ex.isSuitableForRepetition">Repetition Required</div>
+        <div *ngIf="ex.isSuitableForTimeBasedRoutine">Minutes</div>
+      </ion-col>
+      <ion-col>
+        <div class="exercise-list-item__value">{{ex.rate}}%</div>
+        <div>Overall Repetition</div>
+        <div>Completion Percentage</div>
+      </ion-col>
+      <ion-col>
+        <div class="exercise-list-item__value">{{ex.achivedSessions}}/{{ex.totalSessions}}</div>
+        <div>Sessions Completed</div>
+      </ion-col>
+      <ion-col>
+        <div class="exercise-list-item__color" [ngClass]="{'exercise-list-item__color--low': ex.avgScore < 30, 'exercise-list-item__color--middle': ex.avgScore >= 30 && ex.avgScore < 70, 'exercise-list-item__color--hight': ex.avgScore > 70 }"></div>
+      </ion-col>
+      <ion-col>
+        <button ion-button="" icon-only="">
+          <ion-icon name="options"></ion-icon>
+        </button>
+      </ion-col>
+
+    </ion-row>
+  </div>
+
+</ion-content>

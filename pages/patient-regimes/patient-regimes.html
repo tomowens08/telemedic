@@ -1,0 +1,51 @@
+<ion-header>
+  <header [title]="'My Regimes'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let regime of regimes">
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-12 col-sm-4>
+          <h1>{{regime.title}}</h1>
+        </ion-col>
+        <ion-col col-12 col-sm-8>
+          <p>{{regime.startDate | date}} - {{regime.endDate | date}}</p>
+          <p>
+            {{regime.frequency}} {{regime.frequency > 1? 'times': 'time'}} a {{regime.frequencyIntervalText}} </p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <button ion-button=""  color="light" icon-end (click)="toggleExercises(regime.id)" margin-bottom="">
+            View exercises
+            <ion-icon name="{{isShowExerciseList(regime.id)? 'remove': 'add'}}"></ion-icon>
+          </button>
+          <ng-container *ngIf="isShowExerciseList(regime.id)">
+            <ion-row align-items-center="" *ngFor="let ex of regime.regimeExercises" class="border" (click)="viewExerciseNav(ex.id)">
+              <ion-col col-12 col-sm-4>
+                <h2>{{ex.exercise.name}}</h2>
+              </ion-col>
+
+              <ion-col col-12 col-sm-3>
+                {{ ex.repetition? ex.repetition : 0}} {{ex.repetition <= 1? 'repetition' : 'repetitions'}}
+              </ion-col>
+              <ion-col col-12 col-sm-3>
+                <ion-badge *ngFor="let exWarmUp of ex.exerciseWarmUps">{{exWarmUp.warmUp.title}}</ion-badge>
+              </ion-col>
+              <ion-col text-right="" col-12 col-sm-2>
+                <button ion-button="" clear="">View</button>
+              </ion-col>
+
+            </ion-row>
+          </ng-container>
+
+        </ion-col>
+      </ion-row>
+
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

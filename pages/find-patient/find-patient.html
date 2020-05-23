@@ -1,0 +1,137 @@
+<ion-header>
+  <header [title]="'Find Patient'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="main-title">
+    <span>Search</span>
+  </div>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input disableEmodji type="text" [(ngModel)]="filter.name"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input disableEmodji type="text" [(ngModel)]="filter.surname"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>County</ion-label>
+        <ion-select [(ngModel)]="filter.countyId">
+          <ion-option *ngFor="let county of counties" [value]="county.id">{{county.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Postal code</ion-label>
+        <ion-input disableEmodji type="text" [(ngModel)]="filter.postCode"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Birthday</ion-label>
+        <ion-datetime displayFormat="{{displayDateFormat}}" [(ngModel)]="birthday"
+                      (ngModelChange)="birthDaySelected()"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Day</ion-label>
+        <ion-datetime displayFormat="DD" [(ngModel)]="day" (ionChange)="daySelected($event)"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Month</ion-label>
+        <ion-datetime displayFormat="MMMM" [(ngModel)]="month" (ionChange)="monthSelected($event)"></ion-datetime>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label floating>Year</ion-label>
+        <ion-datetime displayFormat="YYYY" [(ngModel)]="year" (ionChange)="yearSelected($event)"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col text-right="">
+      <button ion-button (click)="search()">Search</button>
+      <button ion-button color="light" (click)="clearFilter()">Clear</button>
+    </ion-col>
+  </ion-row>
+
+  <div class="search-results">
+    <div class="main-title">
+      <span>Search results</span>
+    </div>
+
+
+    <div padding-top=""> Filter by:
+      <ion-segment [(ngModel)]="filterBy">
+        <ion-segment-button value="showAll">Show All</ion-segment-button>
+        <ion-segment-button value="active">Active</ion-segment-button>
+        <ion-segment-button value="discharge">Discharge</ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <ion-row class="table-header desktop-view" margin-top="">
+      <ion-col>Name</ion-col>
+      <ion-col>Status</ion-col>
+      <ion-col>DOB</ion-col>
+      <ion-col>County</ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+
+    <ion-row align-items-center="" *ngFor="let patient of filteredPatints()"
+             [ngClass]="{'search-results__status--discharged': patient.status == 3 }"  (click)="viewDetails(patient.patientId)">
+      <ion-col col-12 col-sm-12 col-md>
+        <ion-row>
+          <ion-col class="table-header mob-view" col-4 col-sm-3 col-md-12>Name</ion-col>
+          <ion-col col-6 offset-2 col-sm-6 offset-sm-2 col-md-12 offset-md-0>
+            {{patient.name}} {{patient.surname}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-md
+        [ngClass]="{'search-results__status--active': patient.status == 1, 'search-results__status--sos': patient.status == 2, 'search-results__status--discharged': patient.status == 3 }">
+        <ion-row>
+          <ion-col class="table-header mob-view" col-4 col-sm-3 col-md-12>Status</ion-col>
+          <ion-col col-6 offset-2 col-sm-6 offset-sm-2 col-md-12 offset-md-0>
+            {{patient.statusText}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-md>
+        <ion-row>
+          <ion-col class="table-header mob-view" col-4 col-sm-3 col-md-12>DOB</ion-col>
+          <ion-col col-6 offset-2 col-sm-6 offset-sm-2 col-md-12 offset-md-0>
+            {{patient.birthDay | date}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-md>
+        <ion-row>
+          <ion-col class="table-header mob-view" col-4 col-sm-3 col-md-12>County</ion-col>
+          <ion-col col-6 offset-2 col-sm-6 offset-sm-2 col-md-12 offset-md-0>
+            {{patient.countyName}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-md text-md-right>
+        <button ion-button="" clear="">View</button>
+      </ion-col>
+
+    </ion-row>
+  </div>
+</ion-content>

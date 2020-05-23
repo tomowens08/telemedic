@@ -1,0 +1,112 @@
+<ion-header>
+  <header [title]="'Dashboard'"></header>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card class="dashboard-info">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12 col-sm-4 col-lg-4>
+            <user-pic [img]="clinicalInfo.profileImageUrl"></user-pic>
+            <h2 class="dashboard-title">{{clinicalInfo.name}} {{clinicalInfo.surname}}</h2>
+          </ion-col>
+          <ion-col col-12 col-sm-7 col-lg-7 offset-lg-1 offset-sm-1>
+            <ion-card-title>
+              <div class="main-title">
+                <span>General Information</span>
+              </div>
+            </ion-card-title>
+            <ion-row wrap-reverse>
+              <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                <ion-item>
+                  {{clinicalInfo.name}} {{clinicalInfo.surname}}
+                </ion-item>
+              </ion-col>
+              <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                <button ion-button color="light" (click)="editProfile()">Edit</button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+
+                <ion-list>
+                  <ion-item>
+                    Clinic: {{clinicalInfo.clinicName? clinicalInfo.clinicName: '---'}}
+                  </ion-item>
+                  <ion-item>
+                    <ng-container *ngIf="clinicalInfo.birthDay">{{clinicalInfo.birthDay | formatDate}}</ng-container>
+                  </ion-item>
+                  <ion-item>
+                    Address:
+                    {{clinicalInfo.address? clinicalInfo.address: '---'}}
+                  </ion-item>
+                </ion-list>
+
+              </ion-col>
+              <ion-col col-12 col-sm-6 col-md-6 col-lg-6>
+                <ion-list>
+                  <ion-item>
+                    Home Tel No.:
+                    <span class="dashboard-info__tel">
+                       {{clinicalInfo.houseNumber? clinicalInfo.houseNumber : '---'}}
+                    </span>
+                  </ion-item>
+                  <ion-item>
+                    Work Tel No.:
+                    <span class="dashboard-info__tel">
+                      {{clinicalInfo.workPhoneNumber? clinicalInfo.workPhoneNumber: '---'}}
+                    </span>
+                  </ion-item>
+                  <ion-item>
+                    Mobile Tel No.:
+                    <span class="dashboard-info__tel">
+                       {{clinicalInfo.mobilePhoneNumber? clinicalInfo.mobilePhoneNumber: '---'}}
+                    </span>
+                  </ion-item>
+                </ion-list>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="dashboard-patients">
+
+    <h2 class="dashboard-title">Patients</h2>
+
+    <div class="dashboard-patients__btns">
+      <button ion-button (click)="registerRoute()">Register Patient</button>
+      <button ion-button color="light" (click)="findPatient()">Find Patient</button>
+    </div>
+
+    <div class="dashboard-patients__list">
+      <div class="main-title">
+        <span>Last Activity</span>
+      </div>
+
+      <ion-list>
+        <ion-item *ngFor="let patient of patients" (click)="viewPatient(patient.patientId)">
+          <ion-row align-items-center
+                   [ngClass]="{'dashboard-patients__discharged': patient.statusText == 'Discharged'}">
+            <ion-col col-12 col-sm-4 col-md-4 col-lg-4>
+              <h2>{{patient.name +' '+ patient.surname}}</h2>
+            </ion-col>
+            <ion-col col-12 col-sm-8 col-md-8 col-lg-8>
+              <span [ngClass]="{'active': patient.statusText == 'Active'}" class="dashboard-patients__status">{{patient.statusText}}</span>
+            </ion-col>
+          </ion-row>
+          <button ion-button clear item-end class="dashboard-patients__view">
+            View
+          </button>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,40 @@
+page-patient-details {
+  .patient-info{
+  /*padding: 10px;
+
+    border: 1px solid map_get($colors, light);;*/
+
+    &__pic{
+      max-width: 200px;
+
+    }
+    p{
+      padding: 5px 0;
+    }
+
+    &__name{
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    &__status-value{
+      font-size: 20px;
+      font-weight: bold;
+
+      &--active{
+        color: map_get($colors, success);
+      }
+
+      &--sos{
+        color: map_get($colors, danger);
+      }
+      &--discharged{
+        color: map_get($colors, darklight);
+      }
+
+    }
+  }
+
+
+}

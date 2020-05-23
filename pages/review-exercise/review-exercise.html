@@ -1,0 +1,79 @@
+<ion-header>
+  <header [title]="'Review Exercise'"></header>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card class="user-exercise-info">
+    <ion-card-content>
+      <ion-row align-items-center="">
+        <ion-col>
+          <div class="user-exercise-info__name">Shoulder Abduction {{exerciseData.regimeExercise?.exercise?.name}}</div>
+          <div class="user-exercise-info__repetitions">
+          <ng-container *ngIf="exerciseData.regimeExercise?.isSuitableForRepetition">
+            {{exerciseData.regimeExercise?.repetition}} Repetitions
+          </ng-container>
+          <ng-container *ngIf="exerciseData.regimeExercise?.isSuitableForTimeBasedRoutine">
+            {{exerciseData.regimeExercise?.quantityOfMinutes}} Minutes
+          </ng-container>
+          </div>
+        </ion-col>
+        <ion-col text-center="">
+          <div class="user-exercise-info__user-pic">
+            <user-pic [img]="exerciseData.patient?.profileImageUrl"></user-pic>
+          </div>
+          <div class="user-exercise-info__user-name"> {{exerciseData.patient?.name}} {{exerciseData.patient?.surname}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="isShowChart">
+  <div class="overall-performance">
+    <div class="main-title">
+      <span>Overall performance</span>
+    </div>
+
+    <canvas baseChart
+            [datasets]="lineChart.chartData"
+            [options]="lineChart.chartOptions"
+            [colors]="lineChart.chartColors"
+            [legend]="lineChart.ChartLegend"
+            [chartType]="lineChart.ChartType"></canvas>
+
+  </div>
+
+  <div class="overall-progress">
+    <div class="main-title">
+      <span>Overall progress</span>
+    </div>
+
+    <canvas baseChart
+            [datasets]="barChart.data"
+            [options]="barChart.options"
+            [legend]="barChart.legend"
+            [colors]="barChart.colors"
+            [chartType]="barChart.type"></canvas>
+  </div>
+  </div>
+<!--
+  <hr>
+
+  <ion-row align-items-center="" class="exercise-review-nav">
+    <ion-col>
+      <span class="exercise-review-nav__page">1/20</span>
+    </ion-col>
+    <ion-col>
+      <button ion-button="" color="light" icon-left>
+        <ion-icon name="thumbs-up"></ion-icon>
+        Recommend to Clinicians
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button="" color="light">
+        Skip
+      </button>
+    </ion-col>
+  </ion-row>-->
+
+</ion-content>

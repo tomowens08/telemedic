@@ -1,0 +1,78 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.header {
+
+  .back-button-icon-md {
+    font-size: 3.4rem;
+  }
+
+}
+.main-log-out {
+  float: right;
+  margin: 8px 12px !important;
+}
+.main-menu-btn {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  margin: 0 !important;
+}
+.error-message {
+  color: red;
+  margin: 8px 15px;
+  display: block;
+
+  &_main {
+    font-size: 14px;
+    margin: 15px 0;
+  }
+}
+.select-ios,
+.select-md {
+  .select-icon {
+    left: 3px;
+    margin-top: -1px;
+    width: 14px;
+    height: 20px;
+
+    .select-icon-inner {
+      border-top-width: 7px;
+      border-right-width: 7px;
+      border-left-width: 7px;
+    }
+
+  }
+}
+
+//Fixes for keyboard
+.md {
+  .scroll-content {
+    padding-bottom: 0!important;
+  }
+
+  ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
+    -webkit-transition: bottom 0.3s;
+    transition: bottom 0.3s;
+  }
+
+  .col {
+    position : initial !important;
+  }
+}
+//end fixes for keyboard
